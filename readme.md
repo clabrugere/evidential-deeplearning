@@ -1,6 +1,6 @@
 # Evidential deep learning
 
-This repo implements [Evidential Deep Learning to Quantify Classification Uncertainty](https://arxiv.org/abs/1806.01768). The paper proposes a method to quantify uncertainty in a neural networks by parametrizing the class probabilities with a Dirichlet distribution whose parameters are outputs of the neural network.
+This repo implements [Evidential Deep Learning to Quantify Classification Uncertainty](https://arxiv.org/abs/1806.01768). The paper proposes a method to quantify uncertainty in a neural network by parametrizing the class probabilities with a Dirichlet distribution whose parameters are outputs of the neural network.
 
 Under the Subjective Logic framework, belief mass assignments represent the belief that the truth can be on a given state (or a class in this setting) and it also provides an overall uncertainty quantity such that $` u + \sum_{K} b_k = 1 `$, for K possible states (or classes).
 
