@@ -12,8 +12,9 @@ The paper proposes to parametrize the Dirichlet distribution describing the beli
 
 Using a simple convolutional neural network predicting evidences, we can extract the class probabilities, beliefs and total uncertainty. 2nd sample from the top-left is interesting as we see that the model assigned some belief to the class 5 on this wiggly 9 but it still managed to correctly guess the class.
 
-<img src="./resources/predictions_images.png" width="400"/>
-<img src="./resources/predictions_beliefs.png" width="400"/>
+| Images with predictions                                     | Corresponding beliefs and uncertainty                        |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| <img src="./resources/predictions_images.png" width="400"/> | <img src="./resources/predictions_beliefs.png" width="400"/> |
 
 ## Dependencies
 
