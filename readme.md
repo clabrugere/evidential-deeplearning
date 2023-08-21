@@ -8,6 +8,13 @@ Belief masses are calculated from evidences: $` b_k = \frac{e_k}{S} `$ where $` 
 
 The paper proposes to parametrize the Dirichlet distribution describing the beliefs with a neural network that outputs a positive vector of evidences for each classes instead of outputting logits or class probabilities like in the regular classification setting. The model is trained using different possible losses that they describe in the paper.
 
+### Example on MNIST
+
+Using a simple convolutional neural network predicting evidences, we can extract the class probabilities, beliefs and total uncertainty. 2nd sample from the top-left is interesting as we see that the model assigned some belief to the class 5 on this wiggly 9 but it still managed to correctly guess the class.
+
+<img src="./resources/predictions_images.png" width="400"/>
+<img src="./resources/predictions_beliefs.png" width="400"/>
+
 ## Dependencies
 
 The repository has the following dependencies:
