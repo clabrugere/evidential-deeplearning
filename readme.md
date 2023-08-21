@@ -1,6 +1,6 @@
 # Evidential deep learning
 
-This repo implements [Evidential Deep Learning to Quantify Classification Uncertainty](https://arxiv.org/abs/1806.01768). The paper proposes a method to quantify uncertainty in a neural network by parametrizing the class probabilities with a Dirichlet distribution whose parameters are outputs of the neural network.
+This repo implements [Evidential Deep Learning to Quantify Classification Uncertainty](https://arxiv.org/abs/1806.01768). The paper proposes a method to quantify uncertainty in a neural network by modeling class probabilities with a Dirichlet distribution parametrized by a neural network.
 
 Under the Subjective Logic framework, belief mass assignments represent the belief that the truth can be on a given state (or a class in this setting) and it also provides an overall uncertainty quantity such that $` u + \sum_{K} b_k = 1 `$, for K possible states (or classes). The overall uncertainty is especially interesting as it provides a flexible mechanism for the neural network to decide "I don't know".
 
@@ -57,10 +57,10 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.005)
 model.train()
 
 for epoch in range(max_epoch):
-    for (x, labels) in iter(train_dataloader):
+    for x, labels in iter(train_dataloader):
         x, labels = x.to(device), labels.to(device)
         # the loss expects the target to be one-hot encoded
-        eye = torch.eye(10, dtype=torch.float32)
+        eye = torch.eye(10, dtype=torch.float32, device=device)
         labels = eye[labels]
         evidences = model(x)
 
@@ -74,6 +74,7 @@ for epoch in range(max_epoch):
 model.eval()
 predictions, uncertainty, beliefs, labels = [], [], [], []
 for x, y in iter(test_dataloader):
+    x, y = x.to(device), y.to(device)
     y_pred, u = model.predict(x)
     labels.append(y)
     predictions.append(y_pred)
