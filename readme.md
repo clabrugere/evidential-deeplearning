@@ -64,16 +64,18 @@ for epoch in range(max_epoch):
 
 # make predictions with uncertainty
 model.eval()
-predictions, uncertainty, labels = [], [], []
+predictions, uncertainty, beliefs, labels = [], [], [], []
 for x, y in iter(test_dataloader):
     y_pred, u = model.predict(x)
     labels.append(y)
     predictions.append(y_pred)
     uncertainty.append(u)
+    beliefs.append(b)
 
 labels = torch.concat(labels, dim=0)
 predictions = torch.concat(predictions, dim=0)
 uncertainty = torch.concat(uncertainty, dim=0)
+beliefs = torch.concat(beliefs, dim=0)
 
 ```
 
