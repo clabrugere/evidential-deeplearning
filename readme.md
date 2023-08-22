@@ -1,8 +1,8 @@
 # Evidential deep learning
 
-This repo implements [Evidential Deep Learning to Quantify Classification Uncertainty](https://arxiv.org/abs/1806.01768). The paper proposes a method to quantify uncertainty in a neural network by modeling class probabilities with a Dirichlet distribution parametrized by a neural network.
+This repo implements [Evidential Deep Learning to Quantify Classification Uncertainty](https://arxiv.org/abs/1806.01768). The paper proposes a method to model class probabilities with a Dirichlet distribution that is parametrized by a neural network. In this setting, the neural network outputs a positive vector representing "evidences" of the truth being on a specific class and serves as parameter of the Dirichlet distribution. From that, we can get the probability vector as the mean of the distribution, but most importantly extract "evidences" for each class as a measure of belief and a global uncertainty that can be seen as a distinct class meaning "I don't know".
 
-Under the Subjective Logic framework, belief mass assignments represent the belief that the truth can be on a given state (or a class in this setting) and it also provides an overall uncertainty quantity such that $` u + \sum_{K} b_k = 1 `$, for K possible states (or classes). The overall uncertainty is especially interesting as it provides a flexible mechanism for the neural network to decide "I don't know".
+Under the Subjective Logic framework, belief mass assignments represent the belief that the truth can be on a given state (or a class in this setting) and it also provides an overall uncertainty quantity such that $` u + \sum_{K} b_k = 1 `$, for K possible states (or classes).
 
 Belief masses are calculated from evidences: $` b_k = \frac{e_k}{S} `$ where $` S = \sum_{K} (e_k + 1) `$ and the overall uncertainty is defined $` \frac{K}{S} `$. Those belief mass assignments correspond to a Dirichlet distribution with parameters $` \alpha_{k} = e_k + 1 `$, and this distribution is used as a prior over the class probabilities. The expected probability of a class k is the mean of the Dirichlet distribution: $` P_k = \frac{\alpha_{k}}{ \sum_{K} \alpha_{i} } `$
 
