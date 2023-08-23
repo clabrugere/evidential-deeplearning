@@ -31,7 +31,7 @@ class EDLClassifier(nn.Module):
         evidences = self(x)
         # alphas are the parameters of the Dirichlet distribution that models the probability distribution over the
         # class probabilities and strength is the Dirichlet strength
-        alphas = evidences + 1
+        alphas = evidences + 1.0
         strength = torch.sum(alphas, dim=-1, keepdim=True)
         probabilities = alphas / strength
 
@@ -84,7 +84,7 @@ class SSBayesRiskLoss(nn.Module):
         probabilities = alphas / strength
 
         error = (labels - probabilities) ** 2
-        variance = probabilities * (1 - probabilities) / (strength + 1)
+        variance = probabilities * (1.0 - probabilities) / (strength + 1.0)
 
         loss = torch.sum(error + variance, dim=-1)
 
@@ -99,7 +99,7 @@ class KLDivergenceLoss(nn.Module):
     def forward(self, evidences, labels):
         num_classes = evidences.size(-1)
         alphas = evidences + 1.0
-        alphas_tilde = labels + (1 - labels) * alphas
+        alphas_tilde = labels + (1.0 - labels) * alphas
         strength_tilde = torch.sum(alphas_tilde, dim=-1, keepdim=True)
 
         # lgamma is the log of the gamma function
@@ -109,7 +109,7 @@ class KLDivergenceLoss(nn.Module):
             - torch.sum(torch.lgamma(alphas_tilde), dim=-1, keepdim=True)
         )
         second_term = torch.sum(
-            (alphas_tilde - 1) * (torch.digamma(alphas_tilde) - torch.digamma(strength_tilde)), dim=-1, keepdim=True
+            (alphas_tilde - 1.0) * (torch.digamma(alphas_tilde) - torch.digamma(strength_tilde)), dim=-1, keepdim=True
         )
         loss = torch.mean(first_term + second_term)
 
