@@ -29,7 +29,7 @@ The repository has the following dependencies:
 git clone https://github.com/clabrugere/evidential-deeplearning.git
 ```
 
-## Usage
+## Install
 
 See the example notebook.
 
