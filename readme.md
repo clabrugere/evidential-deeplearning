@@ -4,7 +4,7 @@ This repo implements [Evidential Deep Learning to Quantify Classification Uncert
 
 Under the Subjective Logic framework, belief mass assignments represent the belief that the truth can be on a given state (or a class in this setting) and it also provides an overall uncertainty quantity such that $` u + \sum_{k} b_k = 1 `$, for K possible states (or classes).
 
-Belief masses are calculated from evidences: $` b_k = \frac{e_k}{S} `$ where $` S = \sum_{k} (e_k + 1) `$ and the overall uncertainty is defined $` \frac{K}{S} `$. Those belief mass assignments correspond to a Dirichlet distribution with parameters $` \alpha_{k} = e_k + 1 `$, and this distribution is used as a prior over the class probabilities. The expected probability of a class k is the mean of the Dirichlet distribution: $` P_k = \frac{\alpha_{k}}{ \sum_{i} \alpha_{i} } `$
+Belief masses are calculated from evidences: $` b_k = \frac{e_k}{S} `$ where $` S = \sum_{k} (e_k + 1) `$ and the overall uncertainty is defined as $` \frac{K}{S} `$. Those belief mass assignments correspond to a Dirichlet distribution with parameters $` \alpha_{k} = e_k + 1 `$, and this distribution is used as a prior over the class probabilities. The expected probability of a class k is the mean of the Dirichlet distribution: $` P_k = \frac{\alpha_{k}}{ \sum_{i} \alpha_{i} } `$
 
 The paper proposes to parametrize the Dirichlet distribution describing the beliefs with a neural network that outputs a positive vector of evidences for each classes instead of outputting logits or class probabilities like in the regular classification setting. The model is trained using different possible losses that are describe in the paper.
 
@@ -75,7 +75,7 @@ model.eval()
 predictions, uncertainty, beliefs, labels = [], [], [], []
 for x, y in iter(test_dataloader):
     x, y = x.to(device), y.to(device)
-    y_pred, u = model.predict(x)
+    y_pred, u, b = model.predict(x)
     labels.append(y)
     predictions.append(y_pred)
     uncertainty.append(u)
